@@ -1,13 +1,14 @@
 pipeline{
-  agent any stages{
-    stage('Build'){
-      steps{
-        sh 'mvn clean install'
-        echo 'Build Stage Succesful'
-      }
+  agent any 
+  stages{
+      stage('Build') {
+          steps {
+             sh 'mvn clean install'
+             echo 'Build Stage Succesful'
+        }
     }
-    stage('Test'){
-          steps{
+      stage('Test') {
+          steps {
             sh 'mvn test'
             echo 'Test Stage Successful'
             post{
@@ -16,13 +17,18 @@ pipeline{
               }
             }
           }
-         }
-    stage('Deploy'){
-      steps{
+      }
+    stage('Deploy') {
+      steps {
         sh 'mvn deploy'
         echo 'Deployment Successful'
       }
     }
   }
-  post{failure{echo 'Pipeline Failed'}}}
+  post{
+    failure{
+      echo 'Pipeline Failed'
+    }
+  }
+}
           
